@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
@@ -17,7 +17,7 @@ const navigation = [
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
+  const [currentPath, setCurrentPath] = useState("/");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,8 +28,15 @@ export function Header() {
   }, []);
 
   useEffect(() => {
+    // Simple path tracking without useLocation
+    setCurrentPath(window.location.pathname);
     setIsMobileMenuOpen(false);
-  }, [location]);
+  }, []);
+
+  const handleNavClick = (path: string) => {
+    setCurrentPath(path);
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <motion.header
@@ -58,8 +65,9 @@ export function Header() {
             <Link
               key={item.name}
               to={item.href}
+              onClick={() => handleNavClick(item.href)}
               className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors focus-ring ${
-                location.pathname === item.href
+                currentPath === item.href
                   ? "bg-primary text-primary-foreground"
                   : "hover:bg-secondary text-foreground hover:text-secondary-foreground"
               }`}
@@ -103,8 +111,9 @@ export function Header() {
               <Link
                 key={item.name}
                 to={item.href}
+                onClick={() => handleNavClick(item.href)}
                 className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors focus-ring ${
-                  location.pathname === item.href
+                  currentPath === item.href
                     ? "bg-primary text-primary-foreground"
                     : "hover:bg-secondary text-foreground hover:text-secondary-foreground"
                 }`}
