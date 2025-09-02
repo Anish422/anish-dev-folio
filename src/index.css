@@ -2,95 +2,197 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Anish Shah Portfolio Design System - Modern CS Portfolio */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    /* Light Theme - Clean & Professional */
+    --background: 0 0% 98%;
+    --foreground: 220 14% 15%;
+    
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 220 14% 15%;
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --popover-foreground: 220 14% 15%;
+    
+    /* Primary: Electric Blue #0ea5e9 */
+    --primary: 199 89% 48%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 199 89% 42%;
+    
+    /* Accent: Vibrant Green #22c55e */
+    --accent: 142 76% 46%;
+    --accent-foreground: 0 0% 100%;
+    --accent-hover: 142 76% 40%;
+    
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 9% 46%;
+    
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 199 89% 48%;
+    
+    /* Portfolio-specific tokens */
+    --hero-gradient: linear-gradient(135deg, hsl(199 89% 48%), hsl(142 76% 46%));
+    --tech-badge: 220 14% 94%;
+    --tech-badge-foreground: 220 14% 15%;
+    --metric-bg: hsl(199 89% 48% / 0.1);
+    --glass-bg: hsl(0 0% 100% / 0.8);
+    --shadow-lg: 0 10px 25px -5px hsl(220 14% 15% / 0.1), 0 10px 10px -5px hsl(220 14% 15% / 0.04);
+    --shadow-glow: 0 0 40px hsl(199 89% 48% / 0.3);
+    
+    --radius: 0.75rem;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Dark Theme - Deep Navy Surface */
+    --background: 220 91% 7%;
+    --foreground: 220 14% 89%;
+    
+    --card: 220 84% 10%;
+    --card-foreground: 220 14% 89%;
+    
+    --popover: 220 84% 10%;
+    --popover-foreground: 220 14% 89%;
+    
+    /* Primary: Brighter in dark mode */
+    --primary: 199 89% 55%;
+    --primary-foreground: 220 91% 7%;
+    --primary-hover: 199 89% 60%;
+    
+    /* Accent: Slightly brighter green */
+    --accent: 142 76% 52%;
+    --accent-foreground: 220 91% 7%;
+    --accent-hover: 142 76% 57%;
+    
+    --secondary: 220 50% 15%;
+    --secondary-foreground: 220 14% 75%;
+    
+    --muted: 220 50% 15%;
+    --muted-foreground: 220 9% 65%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 220 14% 89%;
+    
+    --border: 220 50% 15%;
+    --input: 220 50% 15%;
+    --ring: 199 89% 55%;
+    
+    /* Dark mode specific */
+    --hero-gradient: linear-gradient(135deg, hsl(199 89% 55%), hsl(142 76% 52%));
+    --tech-badge: 220 50% 17%;
+    --tech-badge-foreground: 220 14% 89%;
+    --metric-bg: hsl(199 89% 55% / 0.15);
+    --glass-bg: hsl(220 91% 7% / 0.8);
+    --shadow-lg: 0 10px 25px -5px hsl(0 0% 0% / 0.25), 0 10px 10px -5px hsl(0 0% 0% / 0.1);
+    --shadow-glow: 0 0 40px hsl(199 89% 55% / 0.4);
+  }
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+  /* Smooth theme transitions */
+  * {
+    @apply border-border transition-colors duration-300;
+  }
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+  /* Focus styles for accessibility */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+  /* Scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+}
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+@layer components {
+  /* Hero gradient text */
+  .gradient-text {
+    background: var(--hero-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+  /* Glass morphism effect */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.2);
+  }
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+  /* Tech badge styles */
+  .tech-badge {
+    @apply inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium;
+    background: hsl(var(--tech-badge));
+    color: hsl(var(--tech-badge-foreground));
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+  /* Metric card */
+  .metric-card {
+    @apply p-4 rounded-lg text-center;
+    background: var(--metric-bg);
+    backdrop-filter: blur(8px);
+  }
+
+  /* Button hover effects */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] transition-all duration-200;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-primary:hover {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Animations */
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+
+  @keyframes marquee-reverse {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: var(--shadow-lg); }
+    50% { box-shadow: var(--shadow-glow); }
+  }
+
+  .animate-marquee {
+    animation: marquee 25s linear infinite;
+  }
+
+  .animate-marquee-reverse {
+    animation: marquee-reverse 25s linear infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 4s ease-in-out infinite;
   }
 }
 
