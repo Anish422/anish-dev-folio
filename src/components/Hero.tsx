@@ -95,8 +95,8 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
           >
-            <Button asChild size="lg" className="btn-primary">
-              <Link to="/projects">
+            <Button size="lg" className="btn-primary" asChild>
+              <Link to="/projects" className="inline-flex items-center">
                 <ExternalLink className="mr-2 h-4 w-4" />
                 View Projects
               </Link>

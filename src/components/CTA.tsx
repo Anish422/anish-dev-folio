@@ -60,12 +60,12 @@ export function CTA({
           transition={{ delay: 0.6, duration: 0.6 }}
         >
           <Button 
-            asChild 
             size="lg"
             variant={variant === "accent" ? "secondary" : "default"}
             className="group"
+            asChild
           >
-            <Link to={buttonHref}>
+            <Link to={buttonHref} className="inline-flex items-center">
               {buttonText}
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Link>

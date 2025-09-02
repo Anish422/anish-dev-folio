@@ -78,8 +78,8 @@ export default function Home() {
         </div>
 
         <div className="text-center">
-          <Button asChild variant="outline" size="lg">
-            <Link to="/projects">
+          <Button variant="outline" size="lg" asChild>
+            <Link to="/projects" className="inline-flex items-center">
               View All Projects
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
