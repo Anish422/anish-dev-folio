@@ -4,15 +4,28 @@ import { Button } from "@/components/ui/button";
 import { profile } from "@/content/profile";
 import { Link } from "react-router-dom";
 import headshotImage from "@/assets/headshot.jpg";
+import headshot2 from "@/assets/headshot-2.jpg";
+import headshot3 from "@/assets/headshot-3.jpg";
+import headshot4 from "@/assets/headshot-4.jpg";
+import headshot5 from "@/assets/headshot-5.jpg";
 import { useState, useEffect } from "react";
 
 export function Hero() {
-  const [currentEffect, setCurrentEffect] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
-  // Cycle through different visual effects every 3 seconds
+  // Array of profile images
+  const profileImages = [
+    headshotImage,
+    headshot2,
+    headshot3,
+    headshot4,
+    headshot5
+  ];
+  
+  // Cycle through different images every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentEffect((prev) => (prev + 1) % 5);
+      setCurrentImageIndex((prev) => (prev + 1) % profileImages.length);
     }, 3000);
     
     return () => clearInterval(interval);
@@ -24,47 +37,6 @@ export function Hero() {
     link.href = '/assets/resume/Anish Shah - Software Resume.pdf';
     link.download = 'Anish Shah - Resume.pdf';
     link.click();
-  };
-
-  const getImageEffects = (effectIndex: number) => {
-    const effects = [
-      // Original - clean professional look
-      {
-        filter: "brightness(1) contrast(1) saturate(1) hue-rotate(0deg)",
-        scale: 1,
-        rotate: 0,
-        borderColor: "border-primary/30"
-      },
-      // Tech blue - cool coding vibe
-      {
-        filter: "brightness(1.1) contrast(1.2) saturate(1.3) hue-rotate(200deg)",
-        scale: 1.05,
-        rotate: 2,
-        borderColor: "border-blue-400/50"
-      },
-      // Warm orange - creative energy
-      {
-        filter: "brightness(1.2) contrast(1.1) saturate(1.4) hue-rotate(30deg)",
-        scale: 0.95,
-        rotate: -3,
-        borderColor: "border-orange-400/50"
-      },
-      // High contrast - bold professional
-      {
-        filter: "brightness(1.3) contrast(1.5) saturate(0.8) hue-rotate(0deg)",
-        scale: 1.1,
-        rotate: 1,
-        borderColor: "border-accent/60"
-      },
-      // Subtle desaturated - minimalist
-      {
-        filter: "brightness(0.9) contrast(1.3) saturate(0.6) hue-rotate(270deg)",
-        scale: 1,
-        rotate: -1,
-        borderColor: "border-muted-foreground/40"
-      }
-    ];
-    return effects[effectIndex];
   };
 
   return (
@@ -152,19 +124,18 @@ export function Hero() {
             <motion.div 
               className="relative"
               animate={{ 
-                scale: getImageEffects(currentEffect).scale,
-                rotate: getImageEffects(currentEffect).rotate
+                scale: [1, 1.02, 1],
+                rotate: [0, 1, 0]
               }}
               transition={{ 
-                duration: 1.5, 
-                ease: "easeInOut",
-                type: "spring",
-                stiffness: 100
+                duration: 4, 
+                repeat: Infinity,
+                ease: "easeInOut"
               }}
             >
               {/* Animated border ring */}
               <motion.div
-                className={`absolute inset-0 rounded-full border-4 ${getImageEffects(currentEffect).borderColor} blur-sm`}
+                className="absolute inset-0 rounded-full border-4 border-primary/30 blur-sm"
                 animate={{ 
                   scale: [1, 1.1, 1],
                   opacity: [0.5, 0.8, 0.5]
@@ -176,19 +147,17 @@ export function Hero() {
                 }}
               />
               
-              {/* Main profile image */}
+              {/* Main profile image with crossfade */}
               <motion.img
-                src={headshotImage}
+                key={currentImageIndex}
+                src={profileImages[currentImageIndex]}
                 alt="Anish Shah - Profile"
                 className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover border-4 border-background shadow-2xl relative z-10"
-                style={{
-                  filter: getImageEffects(currentEffect).filter
-                }}
-                animate={{ 
-                  filter: getImageEffects(currentEffect).filter
-                }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.1 }}
                 transition={{ 
-                  duration: 1.5, 
+                  duration: 0.8, 
                   ease: "easeInOut" 
                 }}
                 whileHover={{ 
