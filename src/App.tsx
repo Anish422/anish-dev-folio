@@ -1,8 +1,9 @@
+// App.tsx
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom"; // ⬅️ swap to HashRouter
 import { ThemeProvider } from "@/hooks/use-theme";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -21,7 +22,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <HashRouter>
           <div className="min-h-screen flex flex-col">
             {/* Skip to content link for accessibility */}
             <a
@@ -30,9 +31,9 @@ const App = () => (
             >
               Skip to content
             </a>
-            
+
             <Header />
-            
+
             <main id="main" className="flex-1">
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -44,10 +45,10 @@ const App = () => (
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
-            
+
             <Footer />
           </div>
-        </BrowserRouter>
+        </HashRouter>
       </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>
