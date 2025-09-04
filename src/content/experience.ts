@@ -23,44 +23,40 @@ export const experience = [
   },
   {
     company: "City of Toronto",
-    role: "Cyber Security Analyst — Co-op",
+    role: "Cyber Security Analyst Co-op",
     location: "Toronto, ON", 
     start: "May 2024",
     end: "Aug 2024",
     bullets: [
-      "Led Risk Treatment Plan closure assessments; facilitated closure of ~90% outstanding risks, aligning with security standards.",
-      "Standardized BCP/DR documentation used in 10+ agency meetings, improving continuity planning and onboarding efficiency by ~33%.",
-      "Researched Generative AI security implications with senior management, informing risk mitigation and governance discussions.",
-      "Automated exporting 2,500+ JIRA tickets to Excel via VBA with instant visualizations, saving 20+ work hours weekly."
+      "Led Risk Treatment Plan (RTP) closure assessments, evaluating application risks and implemented controls' effectiveness. Facilitated the closure of 90% of outstanding risks, ensuring alignment with security standards",
+      "Developed standardized Business Continuity and Disaster Recovery (BCP/DR) documentation used in 10+ agency meetings, improving continuity planning and onboarding efficiency by 33%"
     ],
     tech: [
-      "BCP/DR", "Risk Assessment", "VBA", "Excel", "JIRA", "Governance"
+      "Risk Assessment", "BCP/DR", "Security Standards", "Documentation", "Governance"
     ],
     metrics: [
-      { label: "Risks Closed", value: "≈90%" },
-      { label: "Time Saved", value: "20+ hrs/wk" },
-      { label: "Meetings Supported", value: "10+" }
+      { label: "Risks Closed", value: "90%" },
+      { label: "Efficiency Improvement", value: "+33%" },
+      { label: "Agency Meetings", value: "10+" }
     ]
   },
   {
     company: "City of Toronto",
-    role: "Cyber Security Analyst — Co-op",
-    location: "Toronto, ON", 
+    role: "Cyber Security Analyst Co-op", 
+    location: "Toronto, ON",
     start: "May 2023",
     end: "Aug 2023",
     bullets: [
-      "Led Risk Treatment Plan closure assessments; facilitated closure of ~90% outstanding risks, aligning with security standards.",
-      "Standardized BCP/DR documentation used in 10+ agency meetings, improving continuity planning and onboarding efficiency by ~33%.",
-      "Researched Generative AI security implications with senior management, informing risk mitigation and governance discussions.",
-      "Automated exporting 2,500+ JIRA tickets to Excel via VBA with instant visualizations, saving 20+ work hours weekly."
+      "Conducted thorough research on Generative AI and its cyber security implications working with senior management leading to strategic discussions on AI risk mitigation and governance across the City of Toronto",
+      "Automated JIRA ticket input to Excel using VBA to save 20+ working hours weekly by exporting 2500+ tickets and providing visual data representations simultaneously"
     ],
     tech: [
-      "BCP/DR", "Risk Assessment", "VBA", "Excel", "JIRA", "Governance"
+      "Generative AI", "Risk Assessment", "VBA", "Excel", "JIRA", "Data Analysis"
     ],
     metrics: [
-      { label: "Risks Closed", value: "≈90%" },
       { label: "Time Saved", value: "20+ hrs/wk" },
-      { label: "Meetings Supported", value: "10+" }
+      { label: "Tickets Processed", value: "2500+" },
+      { label: "AI Research", value: "Strategic" }
     ]
   }
 ];
