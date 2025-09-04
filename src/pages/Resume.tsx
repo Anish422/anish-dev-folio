@@ -10,27 +10,45 @@ const resumeTypes = [
   {
     title: "Software Development",
     filename: "Anish Shah - Software Resume.pdf",
-    description: "Focused on full-stack development, web applications, and software engineering projects.",
-    highlights: ["Angular & React", ".NET & Node.js", "Database Design", "CI/CD"]
+    description:
+      "Focused on full-stack development, web applications, and software engineering projects.",
+    highlights: [
+      "Angular & React",
+      ".NET & Node.js",
+      "Database Design",
+      "CI/CD",
+    ],
   },
   {
-    title: "Data Science & Analytics", 
+    title: "Data Science & Analytics",
     filename: "Anish Shah - Data Resume.pdf",
-    description: "Emphasizing data analysis, machine learning, and business intelligence work.",
-    highlights: ["Python & pandas", "Machine Learning", "Power BI", "Statistical Analysis"]
+    description:
+      "Emphasizing data analysis, machine learning, and business intelligence work.",
+    highlights: [
+      "Python & pandas",
+      "Machine Learning",
+      "Power BI",
+      "Statistical Analysis",
+    ],
   },
   {
     title: "Cybersecurity",
-    filename: "Anish Shah - Cyber Resume.pdf", 
-    description: "Highlighting security analysis, risk assessment, and compliance experience.",
-    highlights: ["Risk Assessment", "BCP/DR", "Compliance", "Security Analysis"]
-  }
+    filename: "Anish Shah - Cyber Resume.pdf",
+    description:
+      "Highlighting security analysis, risk assessment, and compliance experience.",
+    highlights: [
+      "Risk Assessment",
+      "BCP/DR",
+      "Compliance",
+      "Security Analysis",
+    ],
+  },
 ];
 
 export default function Resume() {
   const handleDownload = (filename: string) => {
     // Create download link - files should be placed in public/assets/resume/
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = `/assets/resume/${filename}`;
     link.download = filename;
     link.click();
@@ -40,7 +58,7 @@ export default function Resume() {
     <div className="min-h-screen pt-16">
       <Section
         eyebrow="Download"
-        title="Resume & CV" 
+        title="Resume & CV"
         subtitle="Multiple versions of my resume tailored for different roles and industries."
         centerText
       >
@@ -57,7 +75,7 @@ export default function Resume() {
               whileHover={{ y: -4 }}
             >
               <FileText className="w-12 h-12 text-primary mx-auto mb-4" />
-              
+
               <h3 className="text-lg font-semibold mb-2">{resume.title}</h3>
               <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                 {resume.description}
@@ -71,7 +89,7 @@ export default function Resume() {
                 ))}
               </div>
 
-              <Button 
+              <Button
                 onClick={() => handleDownload(resume.filename)}
                 className="w-full group"
               >
@@ -102,7 +120,11 @@ export default function Resume() {
               </a>
             </Button>
             <Button variant="outline" size="sm" asChild className="w-full">
-              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
+              <a
+                href={profile.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ExternalLink className="mr-2 h-4 w-4" />
                 LinkedIn Profile
               </a>
@@ -113,7 +135,7 @@ export default function Resume() {
 
       {/* Skills Matrix */}
       <Section
-        eyebrow="Technical Proficiency" 
+        eyebrow="Technical Proficiency"
         title="Skills Overview"
         className="bg-muted/30"
       >
@@ -128,14 +150,17 @@ export default function Resume() {
               <h3 className="font-semibold mb-4 text-primary">Languages</h3>
               <div className="space-y-2">
                 {skills.languages.map((skill) => (
-                  <div key={skill} className="flex justify-between items-center py-1">
-                    <span className="text-sm">{skill}</span>
+                  <div
+                    key={skill.name}
+                    className="flex justify-between items-center py-1"
+                  >
+                    <span className="text-sm">{skill.name}</span>
                     <div className="flex space-x-1">
                       {[...Array(5)].map((_, i) => (
                         <div
                           key={i}
                           className={`w-2 h-2 rounded-full ${
-                            i < 4 ? 'bg-primary' : 'bg-muted'
+                            i < skill.proficiency ? "bg-primary" : "bg-muted"
                           }`}
                         />
                       ))}
@@ -154,14 +179,17 @@ export default function Resume() {
               <h3 className="font-semibold mb-4 text-primary">Frameworks</h3>
               <div className="space-y-2">
                 {skills.frameworks.slice(0, 8).map((skill) => (
-                  <div key={skill} className="flex justify-between items-center py-1">
-                    <span className="text-sm">{skill}</span>
+                  <div
+                    key={skill.name}
+                    className="flex justify-between items-center py-1"
+                  >
+                    <span className="text-sm">{skill.name}</span>
                     <div className="flex space-x-1">
                       {[...Array(5)].map((_, i) => (
                         <div
                           key={i}
                           className={`w-2 h-2 rounded-full ${
-                            i < 3 ? 'bg-primary' : 'bg-muted'
+                            i < skill.proficiency ? "bg-primary" : "bg-muted"
                           }`}
                         />
                       ))}
@@ -180,14 +208,17 @@ export default function Resume() {
               <h3 className="font-semibold mb-4 text-primary">Tools</h3>
               <div className="space-y-2">
                 {skills.tools.slice(0, 8).map((skill) => (
-                  <div key={skill} className="flex justify-between items-center py-1">
-                    <span className="text-sm">{skill}</span>
+                  <div
+                    key={skill.name}
+                    className="flex justify-between items-center py-1"
+                  >
+                    <span className="text-sm">{skill.name}</span>
                     <div className="flex space-x-1">
                       {[...Array(5)].map((_, i) => (
                         <div
                           key={i}
                           className={`w-2 h-2 rounded-full ${
-                            i < 4 ? 'bg-primary' : 'bg-muted'
+                            i < skill.proficiency ? "bg-primary" : "bg-muted"
                           }`}
                         />
                       ))}

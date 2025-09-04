@@ -1,17 +1,41 @@
 export const skills = {
   languages: [
-    "Java", "Python", "C", "SQL", "JavaScript", "HTML/CSS", "VBA", "C#"
+    { name: "Java", proficiency: 3 },
+    { name: "Python", proficiency: 4 },
+    { name: "C", proficiency: 3 },
+    { name: "SQL", proficiency: 4 },
+    { name: "JavaScript", proficiency: 3 },
+    { name: "HTML/CSS", proficiency: 4 },
+    { name: "VBA", proficiency: 3 },
+    { name: "C#", proficiency: 3 },
   ],
   frameworks: [
-    "Angular", "React", "PrimeNG", "Tailwind", "pandas", "NumPy", 
-    "Matplotlib", "scikit-learn", "JUnit", "Seaborn"
+    { name: "Angular", proficiency: 4 },
+    { name: "React", proficiency: 4 },
+    { name: "PrimeNG", proficiency: 4 },
+    { name: "Tailwind", proficiency: 4 },
+    { name: "pandas", proficiency: 4 },
+    { name: "NumPy", proficiency: 3 },
+    { name: "Matplotlib", proficiency: 3 },
+    { name: "scikit-learn", proficiency: 3 },
+    { name: "JUnit", proficiency: 3 },
+    { name: "Seaborn", proficiency: 3 },
   ],
   tools: [
-    "Git", "Linux/Unix", "REST APIs", "CI/CD", "Azure DevOps", 
-    "Azure Repos", "Azure Pipelines", "Power BI", "SharePoint", 
-    "JIRA", "SSMS", "VS Code", "Android Studio"
+    { name: "Git", proficiency: 4 },
+    { name: "Linux/Unix", proficiency: 4 },
+    { name: "REST APIs", proficiency: 4 },
+    { name: "CI/CD", proficiency: 4 },
+    { name: "Azure DevOps", proficiency: 4 },
+    { name: "Azure Repos", proficiency: 4 },
+    { name: "Azure Pipelines", proficiency: 4 },
+    { name: "Power BI", proficiency: 5 },
+    { name: "SharePoint", proficiency: 3 },
+    { name: "JIRA", proficiency: 3 },
+    { name: "SSMS", proficiency: 3 },
+    { name: "VS Code", proficiency: 3 },
+    { name: "Android Studio", proficiency: 3 },
   ],
-  
   // Tech marquee - key technologies for scrolling display
   marquee: [
     "Java", "Python", "C", "SQL", "JavaScript", "C#", "React", "Angular", 

@@ -14,13 +14,12 @@ export const profile = {
   // Hero section content
   heroTitle: "Hi, I'm Anish! I build secure, reliable, data-driven apps.",
   heroSubtitle:
-    "Full-stack developer specializing in software engineering @ UofT CS '26.",
+    "Full-Stack Developer specializing in Software Engineering @ UofT",
 
   // Quick metrics for hero
   metrics: [
     { label: "Years Experience", value: "2+" },
     { label: "Co-op Terms", value: "3" },
-    { label: "", value: "2x" },
     { label: "Projects Built", value: "10+" },
   ],
 };

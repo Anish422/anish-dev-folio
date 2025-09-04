@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Award, GraduationCap } from "lucide-react";
 
 export default function Home() {
-  const featuredProjects = projects.filter(p => p.featured);
+  const featuredProjects = projects.filter((p) => p.featured);
 
   return (
     <div className="min-h-screen">
@@ -42,7 +42,8 @@ export default function Home() {
               University of Toronto - Computer Science
             </p>
             <p className="text-sm text-muted-foreground">
-              Software Engineering Specialization • Expected {profile.graduation}
+              Software Engineering Specialization • Expected Graduation -{" "}
+              {profile.graduation}
             </p>
           </motion.div>
 
@@ -59,7 +60,7 @@ export default function Home() {
               Academic Excellence Recognition
             </p>
             <p className="text-sm text-muted-foreground">
-              {profile.deansList.join(' • ')}
+              {profile.deansList.join(" • ")}
             </p>
           </motion.div>
         </div>

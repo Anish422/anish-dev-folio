@@ -9,54 +9,70 @@ export const experience = [
       "Maintained and enhanced 10+ web apps with Angular and C# .NET (Minimal API, Entity Framework) integrating PrimeNG and Tailwind for cohesive UI.",
       "Built advanced SQL (complex queries, reusable views, stored procedures) to streamline data flows and enable Power BI visualizations.",
       "Automated CI/CD with Azure Pipelines and Repos, cutting deployment times by up to 40%.",
-      "Designed ETL powering an effectiveness model that improved nuclear site benchmarking accuracy by ~30%."
+      "Designed ETL powering an effectiveness model that improved nuclear site benchmarking accuracy by ~30%.",
     ],
     tech: [
-      "Angular", "C# .NET", "Entity Framework", "PrimeNG", "Tailwind", 
-      "SQL", "Power BI", "Azure DevOps", "Azure Pipelines"
+      "Angular",
+      "C# .NET",
+      "Entity Framework",
+      "PrimeNG",
+      "Tailwind",
+      "SQL",
+      "Power BI",
+      "Azure DevOps",
+      "Azure Pipelines",
     ],
     metrics: [
       { label: "Apps Maintained", value: "10+" },
       { label: "Deploy Time Reduction", value: "−40%" },
-      { label: "Accuracy Improvement", value: "+30%" }
-    ]
+      { label: "Accuracy Improvement", value: "+30%" },
+    ],
   },
   {
     company: "City of Toronto",
     role: "Cyber Security Analyst Co-op",
-    location: "Toronto, ON", 
+    location: "Toronto, ON",
     start: "May 2024",
     end: "Aug 2024",
     bullets: [
       "Led Risk Treatment Plan (RTP) closure assessments, evaluating application risks and implemented controls' effectiveness. Facilitated the closure of 90% of outstanding risks, ensuring alignment with security standards",
-      "Developed standardized Business Continuity and Disaster Recovery (BCP/DR) documentation used in 10+ agency meetings, improving continuity planning and onboarding efficiency by 33%"
+      "Developed standardized Business Continuity and Disaster Recovery (BCP/DR) documentation used in 10+ agency meetings, improving continuity planning and onboarding efficiency by 33%",
     ],
     tech: [
-      "Risk Assessment", "BCP/DR", "Security Standards", "Documentation", "Governance"
+      "Risk Assessment",
+      "BCP/DR",
+      "Security Standards",
+      "Documentation",
+      "Governance",
     ],
     metrics: [
       { label: "Risks Closed", value: "90%" },
       { label: "Efficiency Improvement", value: "+33%" },
-      { label: "Agency Meetings", value: "10+" }
-    ]
+      { label: "Meetings Led", value: "10+" },
+    ],
   },
   {
     company: "City of Toronto",
-    role: "Cyber Security Analyst Co-op", 
+    role: "Cyber Security Analyst Co-op",
     location: "Toronto, ON",
     start: "May 2023",
     end: "Aug 2023",
     bullets: [
       "Conducted thorough research on Generative AI and its cyber security implications working with senior management leading to strategic discussions on AI risk mitigation and governance across the City of Toronto",
-      "Automated JIRA ticket input to Excel using VBA to save 20+ working hours weekly by exporting 2500+ tickets and providing visual data representations simultaneously"
+      "Automated JIRA ticket input to Excel using VBA to save 20+ working hours weekly by exporting 2500+ tickets and providing visual data representations simultaneously",
     ],
     tech: [
-      "Generative AI", "Risk Assessment", "VBA", "Excel", "JIRA", "Data Analysis"
+      "Generative AI",
+      "Risk Assessment",
+      "VBA",
+      "Excel",
+      "JIRA",
+      "Data Analysis",
     ],
     metrics: [
       { label: "Time Saved", value: "20+ hrs/wk" },
       { label: "Tickets Processed", value: "2500+" },
-      { label: "AI Research", value: "Strategic" }
-    ]
-  }
+      { label: "Research", value: "GenAI" },
+    ],
+  },
 ];
