@@ -32,11 +32,13 @@ export default function Experience() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="text-lg font-semibold mb-4">Programming Languages</h3>
+            <h3 className="text-lg font-semibold mb-4">
+              Programming Languages
+            </h3>
             <div className="flex flex-wrap gap-2">
               {skills.languages.map((skill) => (
-                <Badge key={skill} animate>
-                  {skill}
+                <Badge key={skill.name} animate>
+                  {skill.name}
                 </Badge>
               ))}
             </div>
@@ -49,11 +51,13 @@ export default function Experience() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h3 className="text-lg font-semibold mb-4">Frameworks & Libraries</h3>
+            <h3 className="text-lg font-semibold mb-4">
+              Frameworks & Libraries
+            </h3>
             <div className="flex flex-wrap gap-2">
               {skills.frameworks.map((skill) => (
-                <Badge key={skill} animate variant="accent">
-                  {skill}
+                <Badge key={skill.name} animate variant="accent">
+                  {skill.name}
                 </Badge>
               ))}
             </div>
@@ -69,8 +73,8 @@ export default function Experience() {
             <h3 className="text-lg font-semibold mb-4">Tools & Technologies</h3>
             <div className="flex flex-wrap gap-2">
               {skills.tools.map((skill) => (
-                <Badge key={skill} animate variant="outline">
-                  {skill}
+                <Badge key={skill.name} animate variant="outline">
+                  {skill.name}
                 </Badge>
               ))}
             </div>
@@ -79,11 +83,7 @@ export default function Experience() {
       </Section>
 
       {/* Key Achievements */}
-      <Section
-        eyebrow="Highlights"
-        title="Key Achievements"
-        centerText
-      >
+      <Section eyebrow="Highlights" title="Key Achievements" centerText>
         <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           <motion.div
             className="text-center"
@@ -110,10 +110,13 @@ export default function Experience() {
           >
             <div className="metric-card mb-4">
               <div className="text-3xl font-bold text-primary">40%</div>
-              <div className="text-sm text-muted-foreground">Faster Deployments</div>
+              <div className="text-sm text-muted-foreground">
+                Faster Deployments
+              </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              Reduced deployment times through CI/CD automation with Azure Pipelines
+              Reduced deployment times through CI/CD automation with Azure
+              Pipelines
             </p>
           </motion.div>
 
@@ -126,10 +129,13 @@ export default function Experience() {
           >
             <div className="metric-card mb-4">
               <div className="text-3xl font-bold text-primary">90%</div>
-              <div className="text-sm text-muted-foreground">Risk Closure Rate</div>
+              <div className="text-sm text-muted-foreground">
+                Risk Closure Rate
+              </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              Successfully closed outstanding security risks through systematic assessment
+              Successfully closed outstanding security risks through systematic
+              assessment
             </p>
           </motion.div>
         </div>

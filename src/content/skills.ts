@@ -38,8 +38,25 @@ export const skills = {
   ],
   // Tech marquee - key technologies for scrolling display
   marquee: [
-    "Java", "Python", "C", "SQL", "JavaScript", "C#", "React", "Angular", 
-    "Tailwind", ".NET", "pandas", "NumPy", "scikit-learn", "Power BI", 
-    "Azure DevOps", "Docker", "MongoDB", "Node.js", "Flask", "Firebase"
-  ]
+    "Java",
+    "Python",
+    "C",
+    "SQL",
+    "JavaScript",
+    "C#",
+    "React",
+    "Angular",
+    "Tailwind",
+    ".NET",
+    "pandas",
+    "NumPy",
+    "scikit-learn",
+    "Power BI",
+    "Azure DevOps",
+    "Docker",
+    "MongoDB",
+    "Node.js",
+    "Flask",
+    "Firebase",
+  ],
 };
