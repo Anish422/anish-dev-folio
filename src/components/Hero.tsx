@@ -3,14 +3,68 @@ import { ArrowDown, Download, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { profile } from "@/content/profile";
 import { Link } from "react-router-dom";
+import headshotImage from "@/assets/headshot.jpg";
+import { useState, useEffect } from "react";
 
 export function Hero() {
+  const [currentEffect, setCurrentEffect] = useState(0);
+  
+  // Cycle through different visual effects every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentEffect((prev) => (prev + 1) % 5);
+    }, 3000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
   const handleDownloadResume = () => {
     // Link to main resume - will be updated when actual PDFs are added
     const link = document.createElement('a');
     link.href = '/assets/resume/Anish Shah - Software Resume.pdf';
     link.download = 'Anish Shah - Resume.pdf';
     link.click();
+  };
+
+  const getImageEffects = (effectIndex: number) => {
+    const effects = [
+      // Original - clean professional look
+      {
+        filter: "brightness(1) contrast(1) saturate(1) hue-rotate(0deg)",
+        scale: 1,
+        rotate: 0,
+        borderColor: "border-primary/30"
+      },
+      // Tech blue - cool coding vibe
+      {
+        filter: "brightness(1.1) contrast(1.2) saturate(1.3) hue-rotate(200deg)",
+        scale: 1.05,
+        rotate: 2,
+        borderColor: "border-blue-400/50"
+      },
+      // Warm orange - creative energy
+      {
+        filter: "brightness(1.2) contrast(1.1) saturate(1.4) hue-rotate(30deg)",
+        scale: 0.95,
+        rotate: -3,
+        borderColor: "border-orange-400/50"
+      },
+      // High contrast - bold professional
+      {
+        filter: "brightness(1.3) contrast(1.5) saturate(0.8) hue-rotate(0deg)",
+        scale: 1.1,
+        rotate: 1,
+        borderColor: "border-accent/60"
+      },
+      // Subtle desaturated - minimalist
+      {
+        filter: "brightness(0.9) contrast(1.3) saturate(0.6) hue-rotate(270deg)",
+        scale: 1,
+        rotate: -1,
+        borderColor: "border-muted-foreground/40"
+      }
+    ];
+    return effects[effectIndex];
   };
 
   return (
@@ -86,6 +140,91 @@ export function Hero() {
             >
               {profile.heroSubtitle}
             </motion.p>
+          </motion.div>
+
+          {/* Animated Profile Picture */}
+          <motion.div
+            className="mb-12 flex justify-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+          >
+            <motion.div 
+              className="relative"
+              animate={{ 
+                scale: getImageEffects(currentEffect).scale,
+                rotate: getImageEffects(currentEffect).rotate
+              }}
+              transition={{ 
+                duration: 1.5, 
+                ease: "easeInOut",
+                type: "spring",
+                stiffness: 100
+              }}
+            >
+              {/* Animated border ring */}
+              <motion.div
+                className={`absolute inset-0 rounded-full border-4 ${getImageEffects(currentEffect).borderColor} blur-sm`}
+                animate={{ 
+                  scale: [1, 1.1, 1],
+                  opacity: [0.5, 0.8, 0.5]
+                }}
+                transition={{ 
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              
+              {/* Main profile image */}
+              <motion.img
+                src={headshotImage}
+                alt="Anish Shah - Profile"
+                className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover border-4 border-background shadow-2xl relative z-10"
+                style={{
+                  filter: getImageEffects(currentEffect).filter
+                }}
+                animate={{ 
+                  filter: getImageEffects(currentEffect).filter
+                }}
+                transition={{ 
+                  duration: 1.5, 
+                  ease: "easeInOut" 
+                }}
+                whileHover={{ 
+                  scale: 1.1,
+                  transition: { duration: 0.3 }
+                }}
+              />
+              
+              {/* Floating animation dots */}
+              <motion.div
+                className="absolute -top-2 -right-2 w-4 h-4 bg-primary rounded-full"
+                animate={{ 
+                  scale: [1, 1.3, 1],
+                  opacity: [0.6, 1, 0.6]
+                }}
+                transition={{ 
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5
+                }}
+              />
+              <motion.div
+                className="absolute -bottom-2 -left-2 w-3 h-3 bg-accent rounded-full"
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  opacity: [0.7, 1, 0.7]
+                }}
+                transition={{ 
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1
+                }}
+              />
+            </motion.div>
           </motion.div>
 
           {/* CTAs */}
