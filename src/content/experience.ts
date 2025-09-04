@@ -26,7 +26,28 @@ export const experience = [
     role: "Cyber Security Analyst — Co-op",
     location: "Toronto, ON", 
     start: "May 2024",
-    end: "Aug 2024; May 2023 – Aug 2023",
+    end: "Aug 2024",
+    bullets: [
+      "Led Risk Treatment Plan closure assessments; facilitated closure of ~90% outstanding risks, aligning with security standards.",
+      "Standardized BCP/DR documentation used in 10+ agency meetings, improving continuity planning and onboarding efficiency by ~33%.",
+      "Researched Generative AI security implications with senior management, informing risk mitigation and governance discussions.",
+      "Automated exporting 2,500+ JIRA tickets to Excel via VBA with instant visualizations, saving 20+ work hours weekly."
+    ],
+    tech: [
+      "BCP/DR", "Risk Assessment", "VBA", "Excel", "JIRA", "Governance"
+    ],
+    metrics: [
+      { label: "Risks Closed", value: "≈90%" },
+      { label: "Time Saved", value: "20+ hrs/wk" },
+      { label: "Meetings Supported", value: "10+" }
+    ]
+  },
+  {
+    company: "City of Toronto",
+    role: "Cyber Security Analyst — Co-op",
+    location: "Toronto, ON", 
+    start: "May 2023",
+    end: "Aug 2023",
     bullets: [
       "Led Risk Treatment Plan closure assessments; facilitated closure of ~90% outstanding risks, aligning with security standards.",
       "Standardized BCP/DR documentation used in 10+ agency meetings, improving continuity planning and onboarding efficiency by ~33%.",
