@@ -1,23 +1,15 @@
+// vite.config.ts
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // 👇 IMPORTANT for GitHub Project Pages at /anish-dev-folio/
-  base: mode === "production" ? "/anish-dev-folio/" : "/",
-
-  server: {
-    host: "::",
-    port: 8080,
-  },
+  // Use relative paths so the build works from / and from /anish-dev-folio/
+  base: mode === "production" ? "./" : "/",
+  server: { host: "::", port: 8080 },
   plugins: [react(), mode === "development" && componentTagger()].filter(
     Boolean
   ),
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
+  resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
 }));

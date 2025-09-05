@@ -32,12 +32,12 @@ export function Hero() {
 
   // Array of profile images (excluding the default)
   const profileImages = [
-    headshot8,
+    headshot2,
     headshot3,
     headshot4,
     headshot5,
     headshot7,
-    headshot2,
+    headshot8,
   ];
 
   useEffect(() => {
