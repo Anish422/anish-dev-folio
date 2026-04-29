@@ -1,5 +1,31 @@
 export const experience = [
   {
+    company: "Royal Bank of Canada (RBC) Insurance",
+    role: "Data Engineering Co-op",
+    location: "Toronto, ON",
+    start: "Jan 2026",
+    end: "Apr 2026",
+    bullets: [
+      "Built a modular Python-based data pipeline orchestration tool with GUI/CLI enabling automated multi-process workflows, secure data ingestion (SFTP to Snowflake), dynamic credential management, and robust logging.",
+      "Created scalable ETL data pipelines using Snowflake and Python to process 100k+ investment records daily, enabling real-time performance attribution and risk modeling that reduced reporting latency by 40%.",
+      "Led competitor benchmarking using R on OSFI data from 10+ insurers, uncovering discount rate and asset allocation insights that informed RBCI's positioning and portfolio adjustments.",
+      "Engineered an AI-powered research platform for RBCI Investments, leveraging Cohere's NLP models and a vectorized database to process and query thousands of market financial documents from global institutions.",
+    ],
+    tech: [
+      "Python",
+      "Snowflake",
+      "ETL",
+      "R",
+      "Cohere NLP",
+      "Vector Database",
+    ],
+    metrics: [
+      { label: "Records Processed", value: "100k+/day" },
+      { label: "Reporting Latency", value: "−40%" },
+      { label: "Insurers Benchmarked", value: "10+" },
+    ],
+  },
+  {
     company: "Ontario Power Generation",
     role: "Full Stack Developer — Co-op",
     location: "Whitby, ON",
