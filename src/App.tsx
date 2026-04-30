@@ -12,7 +12,6 @@ import Projects from "./pages/Projects";
 import Experience from "./pages/Experience";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import Navbar from "./components/Navbar";
 import { Hero } from "./components/Hero";
 
 const queryClient = new QueryClient();
@@ -37,7 +36,6 @@ const App = () => (
 
             <main id="main" className="flex-1">
               <div className="flex flex-col min-h-screen">
-                <Navbar />
                 <main className="flex-grow">
                   <Routes>
                     <Route path="/" element={<Hero />} />

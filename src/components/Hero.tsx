@@ -239,14 +239,11 @@ export function Hero() {
                 View Projects
               </Link>
             </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={handleDownloadResume}
-              className="group"
-            >
-              <Download className="mr-2 h-4 w-4 group-hover:animate-bounce-subtle" />
-              Download Resume
+            <Button variant="outline" size="lg" asChild className="group">
+              <Link to="/experience" className="inline-flex items-center">
+                <ExternalLink className="mr-2 h-4 w-4" />
+                View Experience
+              </Link>
             </Button>
           </motion.div>
 

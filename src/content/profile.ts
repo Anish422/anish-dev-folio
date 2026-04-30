@@ -19,7 +19,7 @@ export const profile = {
   // Quick metrics for hero
   metrics: [
     { label: "Years Experience", value: "2+" },
-    { label: "Co-op Terms", value: "3" },
+    { label: "Co-op Terms", value: "4" },
     { label: "Projects Built", value: "10+" },
   ],
 };

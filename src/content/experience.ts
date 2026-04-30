@@ -11,14 +11,7 @@ export const experience = [
       "Led competitor benchmarking using R on OSFI data from 10+ insurers, uncovering discount rate and asset allocation insights that informed RBCI's positioning and portfolio adjustments.",
       "Engineered an AI-powered research platform for RBCI Investments, leveraging Cohere's NLP models and a vectorized database to process and query thousands of market financial documents from global institutions.",
     ],
-    tech: [
-      "Python",
-      "Snowflake",
-      "ETL",
-      "R",
-      "Cohere NLP",
-      "Vector Database",
-    ],
+    tech: ["Python", "Snowflake", "ETL", "R", "Cohere NLP", "Vector Database"],
     metrics: [
       { label: "Records Processed", value: "100k+/day" },
       { label: "Reporting Latency", value: "−40%" },
