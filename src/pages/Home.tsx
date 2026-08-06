@@ -1,103 +1,94 @@
-import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Hero } from "@/components/Hero";
 import { TechMarquee } from "@/components/TechMarquee";
 import { Section } from "@/components/Section";
 import { ProjectCard } from "@/components/ProjectCard";
 import { CTA } from "@/components/CTA";
+import { Reveal } from "@/components/Reveal";
 import { projects } from "@/content/projects";
 import { profile } from "@/content/profile";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Award, GraduationCap } from "lucide-react";
 
+/**
+ * The long-form landing page: hero, toolchain, a short "about" record, the
+ * selected projects, and a closing call to action.
+ *
+ * Note: `App.tsx` currently routes "/" straight to <Hero />, so this page is
+ * not reachable. Point the "/" route at <Home /> to bring it back.
+ */
 export default function Home() {
-  const featuredProjects = projects.filter((p) => p.featured);
+  const featured = projects.filter((p) => p.featured);
+
+  const record = [
+    {
+      label: "Education",
+      value: "University of Toronto",
+      note: `Computer Science, Software Engineering specialization · Expected ${profile.graduation}`,
+    },
+    {
+      label: "Recognition",
+      value: "Dean's List",
+      note: profile.deansList.join(" · "),
+    },
+    {
+      label: "Based in",
+      value: profile.location,
+      note: "Open to hybrid and remote",
+    },
+  ];
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <Hero />
-
-      {/* Tech Marquee */}
+    <div>
+      <Hero showScrollCue />
       <TechMarquee />
 
-      {/* About Section */}
+      {/* ── Record ─────────────────────────────────────────────── */}
       <Section
+        index="00.1"
         eyebrow="About"
-        title="Building the future, one line of code at a time"
-        subtitle="Computer Science student at University of Toronto with a specialization in Software Engineering. Passionate about creating secure, scalable solutions that make a real impact."
-        centerText
+        title="The record"
+        subtitle="Computer Science at the University of Toronto, specializing in Software Engineering. I care about systems that stay correct under load and stay legible under maintenance."
       >
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <motion.div
-            className="bg-card border rounded-lg p-6"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <GraduationCap className="w-8 h-8 text-primary mb-4" />
-            <h3 className="text-lg font-semibold mb-2">Education</h3>
-            <p className="text-muted-foreground mb-2">
-              University of Toronto - Computer Science
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Software Engineering Specialization • Expected Graduation -{" "}
-              {profile.graduation}
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="bg-card border rounded-lg p-6"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <Award className="w-8 h-8 text-accent mb-4" />
-            <h3 className="text-lg font-semibold mb-2">Dean's List</h3>
-            <p className="text-muted-foreground mb-2">
-              Academic Excellence Recognition
-            </p>
-            <p className="text-sm text-muted-foreground">
-              {profile.deansList.join(" • ")}
-            </p>
-          </motion.div>
-        </div>
+        <dl className="border-t border-foreground">
+          {record.map((row, i) => (
+            <Reveal key={row.label} delay={i * 0.06}>
+              <div className="group grid gap-2 border-b border-border py-6 md:grid-cols-12 md:items-baseline">
+                <dt className="label text-muted-foreground md:col-span-3">{row.label}</dt>
+                <dd className="md:col-span-9">
+                  <span className="display-sm block text-2xl transition-colors duration-300 group-hover:text-signal md:text-3xl">
+                    {row.value}
+                  </span>
+                  <span className="mt-2 block font-mono text-xs text-muted-foreground">
+                    {row.note}
+                  </span>
+                </dd>
+              </div>
+            </Reveal>
+          ))}
+        </dl>
       </Section>
 
-      {/* Featured Projects */}
-      <Section
-        eyebrow="Featured Work"
-        title="Recent Projects"
-        subtitle="A selection of my recent work showcasing full-stack development, data analysis, and security-focused solutions."
-      >
-        <div className="grid lg:grid-cols-2 gap-6 mb-8">
-          {featuredProjects.map((project) => (
-            <ProjectCard key={project.title} {...project} />
+      {/* ── Selected work ──────────────────────────────────────── */}
+      <Section index="00.2" eyebrow="Selected" title="Recent work">
+        <div className="border-b border-border">
+          {featured.map((project, i) => (
+            <ProjectCard key={project.title} {...project} index={i + 1} />
           ))}
         </div>
 
-        <div className="text-center">
-          <Button variant="outline" size="lg" asChild>
-            <Link to="/projects" className="inline-flex items-center">
-              View All Projects
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+        <div className="mt-10">
+          <Link to="/projects" className="btn-ghost focus-ring" data-cursor="open">
+            Full index ({projects.length}) →
+          </Link>
         </div>
       </Section>
 
-      {/* CTA to Experience */}
-      <Section>
-        <CTA
-          title="Want to learn more about my experience?"
-          description="Explore my professional journey including co-op positions at Ontario Power Generation and City of Toronto."
-          buttonText="View Experience"
-          buttonHref="/experience"
-          variant="accent"
-        />
-      </Section>
+      <CTA
+        title="Let's build something"
+        description="Four co-op terms across full-stack, data engineering and security. Here's the whole record."
+        buttonText="View experience"
+        buttonHref="/experience"
+        variant="accent"
+      />
     </div>
   );
 }

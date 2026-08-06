@@ -1,77 +1,84 @@
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useRef } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Magnetic } from "./Magnetic";
 
 interface CTAProps {
   title: string;
   description: string;
   buttonText: string;
   buttonHref: string;
-  variant?: "default" | "accent";
+  /** `accent` inverts the block to ink; `signal` floods it with vermilion. */
+  variant?: "default" | "accent" | "signal";
 }
 
-export function CTA({ 
-  title, 
-  description, 
-  buttonText, 
+/**
+ * Full-bleed closing block. Inverts against the page so it reads as a hard
+ * stop at the end of a section rather than another card in the flow.
+ */
+export function CTA({
+  title,
+  description,
+  buttonText,
   buttonHref,
-  variant = "default" 
+  variant = "accent",
 }: CTAProps) {
-  return (
-    <motion.section
-      className={`py-16 rounded-2xl ${
-        variant === "accent" 
-          ? "bg-gradient-to-r from-primary to-accent text-white" 
-          : "bg-muted/50"
-      }`}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8 }}
-    >
-      <div className="container text-center max-w-2xl mx-auto">
-        <motion.h2
-          className="text-3xl md:text-4xl font-bold mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-        >
-          {title}
-        </motion.h2>
-        
-        <motion.p
-          className={`text-lg mb-8 leading-relaxed ${
-            variant === "accent" ? "text-white/90" : "text-muted-foreground"
-          }`}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-        >
-          {description}
-        </motion.p>
+  const inverted = variant !== "default";
+  const surface =
+    variant === "signal"
+      ? "bg-signal text-signal-foreground"
+      : variant === "accent"
+        ? "bg-foreground text-background"
+        : "border-y border-border bg-transparent text-foreground";
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-        >
-          <Button 
-            size="lg"
-            variant={variant === "accent" ? "secondary" : "default"}
-            className="group"
-            asChild
-          >
-            <Link to={buttonHref} className="inline-flex items-center">
-              {buttonText}
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </Button>
-        </motion.div>
-      </div>
-    </motion.section>
+  // Same split as <Reveal />: the <section> is observed and never clipped,
+  // while the inner element carries the clip. Observing the clipped element
+  // would mean the clip that hides it also hides it from the observer, and it
+  // could never animate open.
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const reduced = useReducedMotion();
+  const closed = { clipPath: "inset(0% 0% 100% 0%)" };
+  const open = { clipPath: "inset(0% 0% 0% 0%)" };
+
+  return (
+    <section ref={ref} className={`relative overflow-hidden ${surface}`}>
+      <motion.div
+        className="container py-20 md:py-28"
+        initial={reduced ? false : closed}
+        animate={reduced || inView ? open : closed}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <div className="grid gap-10 md:grid-cols-12 md:items-end">
+          <div className="md:col-span-8">
+            <h2 className="display text-[clamp(2.25rem,7vw,5.5rem)]">{title}</h2>
+            <p
+              className={`editorial mt-6 max-w-xl text-xl md:text-2xl ${
+                inverted ? "opacity-70" : "text-muted-foreground"
+              }`}
+            >
+              {description}
+            </p>
+          </div>
+
+          <div className="md:col-span-4 md:justify-self-end">
+            <Magnetic strength={18}>
+              <Link
+                to={buttonHref}
+                data-cursor="open"
+                className={`focus-ring inline-flex items-center gap-3 border px-6 py-4 font-mono text-2xs uppercase tracking-[0.16em] transition-colors duration-200 ${
+                  inverted
+                    ? "border-current hover:bg-background hover:text-foreground"
+                    : "border-foreground hover:bg-foreground hover:text-background"
+                }`}
+              >
+                {buttonText}
+                <span aria-hidden>→</span>
+              </Link>
+            </Magnetic>
+          </div>
+        </div>
+      </motion.div>
+    </section>
   );
 }

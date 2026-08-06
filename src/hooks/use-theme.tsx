@@ -32,20 +32,25 @@ export function ThemeProvider({
 
   useEffect(() => {
     const root = window.document.documentElement;
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
 
-    root.classList.remove("light", "dark");
+    const apply = () => {
+      const resolved =
+        theme === "system" ? (mq.matches ? "dark" : "light") : theme;
 
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light";
+      root.classList.remove("light", "dark");
+      root.classList.add(resolved);
+      // Keeps the browser canvas, overscroll area and native form controls in
+      // step with the palette — without it, dark mode shows a white gutter.
+      root.style.colorScheme = resolved;
+    };
 
-      root.classList.add(systemTheme);
-      return;
-    }
+    apply();
 
-    root.classList.add(theme);
+    // On "system", follow the OS if it changes mid-session.
+    if (theme !== "system") return;
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
   }, [theme]);
 
   const value = {

@@ -1,20 +1,55 @@
-import { Moon, Sun } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 import { useTheme } from "@/hooks/use-theme";
 
+const MODES = [
+  { key: "light", glyph: "☀" },
+  { key: "dark", glyph: "☾" },
+  { key: "system", glyph: "⌥" },
+] as const;
+
+/**
+ * Three-state segmented control rather than a sun/moon flip — the system
+ * setting is a real, selectable option, so it gets its own segment instead of
+ * being an invisible middle state you cycle past.
+ */
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <Button
-      variant="ghost"
-      size="icon"
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className="focus-ring h-9 w-9"
-      aria-label="Toggle theme"
+    <div
+      className="relative flex items-center border border-border"
+      role="radiogroup"
+      aria-label="Colour theme"
     >
-      <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-    </Button>
+      {MODES.map((mode) => {
+        const selected = theme === mode.key;
+        return (
+          <button
+            key={mode.key}
+            role="radio"
+            aria-checked={selected}
+            aria-label={mode.key}
+            data-cursor={mode.key}
+            onClick={() => setTheme(mode.key)}
+            className="focus-ring relative h-8 w-8 text-xs leading-none transition-colors duration-200"
+          >
+            {selected && (
+              <motion.span
+                layoutId="theme-selected"
+                className="absolute inset-0 bg-foreground"
+                transition={{ type: "spring", stiffness: 400, damping: 32 }}
+              />
+            )}
+            <span
+              className={`relative z-10 ${
+                selected ? "text-background" : "text-muted-foreground"
+              }`}
+            >
+              {mode.glyph}
+            </span>
+          </button>
+        );
+      })}
+    </div>
   );
 }

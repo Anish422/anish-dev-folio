@@ -1,6 +1,5 @@
-import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Badge } from "./Badge";
 
 interface ProjectLink {
@@ -17,8 +16,19 @@ interface ProjectCardProps {
   links: ProjectLink[];
   category: string;
   featured?: boolean;
+  /** Position in the index; printed as the entry's catalogue number. */
+  index?: number;
 }
 
+/**
+ * A catalogue entry rather than a card: oversized index number in the margin,
+ * metadata in mono along the top rule, title in expanded grotesque, summary
+ * in serif.
+ *
+ * The engineering detail (`bullets`) sits behind a SPEC toggle — always one
+ * click away, never crowding the scan. The whole entry is framed by a signal
+ * rule that wipes in from the left on hover.
+ */
 export function ProjectCard({
   title,
   when,
@@ -27,99 +37,117 @@ export function ProjectCard({
   bullets = [],
   links,
   category,
-  featured = false
+  featured = false,
+  index,
 }: ProjectCardProps) {
+  const [open, setOpen] = useState(false);
+  const id = `spec-${title.replace(/\W+/g, "-").toLowerCase()}`;
+
   return (
-    <motion.div
-      className={`group relative bg-card border rounded-lg p-6 hover:shadow-lg transition-all duration-300 ${
-        featured ? "ring-2 ring-primary/20" : ""
-      }`}
-      whileHover={{ y: -4 }}
-      initial={{ opacity: 0, y: 20 }}
+    <motion.article
+      className="group relative border-t border-border pt-6 transition-colors duration-300 hover:border-foreground"
+      initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
     >
-      {featured && (
-        <div className="absolute -top-3 left-6">
-          <Badge variant="accent" className="text-xs">
-            Featured
-          </Badge>
-        </div>
-      )}
+      {/* Signal rule wiping across the top edge on hover */}
+      <span className="absolute inset-x-0 -top-px h-px origin-left scale-x-0 bg-signal transition-transform duration-500 ease-out group-hover:scale-x-100" />
 
-      {/* Header */}
-      <div className="flex items-start justify-between mb-4">
-        <div>
-          <h3 className="text-xl font-semibold mb-1 group-hover:text-primary transition-colors">
+      {/* Metadata line */}
+      <div className="mb-5 flex items-center justify-between gap-4">
+        <span className="label tabular text-muted-foreground transition-colors group-hover:text-signal">
+          {index !== undefined ? String(index).padStart(2, "0") : "—"}
+        </span>
+        <div className="flex items-center gap-3">
+          {featured && <span className="label text-signal">★ Selected</span>}
+          <span className="label text-muted-foreground">{category}</span>
+          <span className="label text-muted-foreground">{when}</span>
+        </div>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-12">
+        {/* Title */}
+        <div className="md:col-span-5">
+          <h3 className="display-sm text-3xl transition-colors duration-300 group-hover:text-signal md:text-4xl">
             {title}
           </h3>
-          <p className="text-sm text-muted-foreground">{when}</p>
+
+          {links.length > 0 && (
+            <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+              {links.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="open"
+                  className="link-sweep focus-ring font-mono text-2xs uppercase tracking-[0.16em] text-foreground"
+                >
+                  {link.label} ↗
+                </a>
+              ))}
+            </div>
+          )}
         </div>
-        <Badge variant="outline" className="text-xs">
-          {category}
-        </Badge>
-      </div>
 
-      {/* Tech stack */}
-      <div className="flex flex-wrap gap-2 mb-4">
-        {stack.slice(0, 6).map((tech) => (
-          <Badge key={tech} className="text-xs">
-            {tech}
-          </Badge>
-        ))}
-        {stack.length > 6 && (
-          <Badge className="text-xs opacity-60">
-            +{stack.length - 6} more
-          </Badge>
-        )}
-      </div>
+        {/* Body */}
+        <div className="md:col-span-7">
+          <p className="editorial text-xl text-foreground md:text-2xl">{summary}</p>
 
-      {/* Description */}
-      <p className="text-muted-foreground mb-4 leading-relaxed">
-        {summary}
-      </p>
+          <div className="mt-5 flex flex-wrap gap-1.5">
+            {stack.map((tech) => (
+              <Badge key={tech}>{tech}</Badge>
+            ))}
+          </div>
 
-      {/* Bullets */}
-      {bullets.length > 0 && (
-        <ul className="space-y-2 mb-6">
-          {bullets.map((bullet, index) => (
-            <li key={index} className="text-sm text-muted-foreground flex items-start">
-              <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 mr-3 flex-shrink-0" />
-              {bullet}
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {/* Links */}
-      {links.length > 0 && (
-        <div className="flex gap-2 pt-4 border-t">
-          {links.map((link) => (
-            <Button
-              key={link.label}
-              variant="outline"
-              size="sm"
-              asChild
-              className="focus-ring"
-            >
-              <a
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center"
+          {bullets.length > 0 && (
+            <>
+              <button
+                onClick={() => setOpen((o) => !o)}
+                aria-expanded={open}
+                aria-controls={id}
+                data-cursor={open ? "close" : "spec"}
+                className="focus-ring mt-6 flex items-center gap-2 font-mono text-2xs uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-foreground"
               >
-                {link.label === "GitHub" ? (
-                  <Github className="w-4 h-4 mr-1" />
-                ) : (
-                  <ExternalLink className="w-4 h-4 mr-1" />
+                <motion.span animate={{ rotate: open ? 45 : 0 }} className="inline-block">
+                  +
+                </motion.span>
+                {open ? "Hide spec" : `Spec (${bullets.length})`}
+              </button>
+
+              <AnimatePresence initial={false}>
+                {open && (
+                  <motion.div
+                    id={id}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <ul className="mt-5 space-y-3 border-l border-signal pl-5">
+                      {bullets.map((bullet, i) => (
+                        <li
+                          key={i}
+                          className="flex gap-3 text-sm leading-relaxed text-muted-foreground"
+                        >
+                          <span className="font-mono text-2xs tabular text-signal">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
                 )}
-                {link.label}
-              </a>
-            </Button>
-          ))}
+              </AnimatePresence>
+            </>
+          )}
         </div>
-      )}
-    </motion.div>
+      </div>
+
+      <div className="h-10" />
+    </motion.article>
   );
 }

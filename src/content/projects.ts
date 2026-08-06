@@ -1,5 +1,21 @@
 export const projects = [
   {
+    title: "OPS Brainworks",
+    when: "Jan 2026",
+    stack: [
+      "React", "Node.js", "Express", "PostgreSQL",
+      "JWT", "bcrypt", "OpenAI API"
+    ],
+    summary: "Full-stack collaboration platform enabling 60K+ Ontario Public Service employees to securely share ideas and turn discussions into actionable projects.",
+    bullets: [
+      "Implemented anonymous and authenticated participation with JWT-based auth and bcrypt encryption, fostering open dialogue and boosting engagement across the platform.",
+      "Integrated OpenAI's API for NLP-driven text generation and summarization, helping users refine ideas and extract key insights from discussions."
+    ],
+    links: [],
+    category: "Web",
+    featured: true
+  },
+  {
     title: "SecurAid",
     when: "Jan 2025",
     stack: [

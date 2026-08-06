@@ -1,66 +1,103 @@
-import { Github, Linkedin, Mail } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { profile } from "@/content/profile";
+import { ScrambleText } from "./ScrambleText";
 
+const SITEMAP = [
+  { name: "Index", href: "/" },
+  { name: "Projects", href: "/projects" },
+  { name: "Experience", href: "/experience" },
+  { name: "Contact", href: "/contact" },
+];
+
+/**
+ * Colophon plate. Closes the document with the name set at full width, the
+ * sitemap and outbound links as two mono columns, and a build note.
+ */
 export function Footer() {
-  const socialLinks = [
-    {
-      name: "GitHub",
-      href: profile.github,
-      icon: Github,
-    },
-    {
-      name: "LinkedIn", 
-      href: profile.linkedin,
-      icon: Linkedin,
-    },
-    {
-      name: "Email",
-      href: `mailto:${profile.email}`,
-      icon: Mail,
-    },
+  const elsewhere = [
+    { name: "GitHub", href: profile.github },
+    { name: "LinkedIn", href: profile.linkedin },
+    { name: "Email", href: `mailto:${profile.email}` },
   ];
 
   return (
-    <footer className="border-t bg-background/50 backdrop-blur-sm">
-      <div className="container py-8">
-        <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
-          {/* Left side - Name and location */}
-          <div className="text-center md:text-left">
-            <p className="text-sm font-medium">{profile.name}</p>
-            <p className="text-sm text-muted-foreground">{profile.location}</p>
+    <footer className="border-t border-foreground">
+      <div className="container py-16">
+        <div className="grid gap-12 md:grid-cols-12">
+          {/* Contact block */}
+          <div className="md:col-span-6">
+            <p className="label mb-4 text-muted-foreground">Get in touch</p>
+            <a
+              href={`mailto:${profile.email}`}
+              data-cursor="write"
+              className="link-sweep focus-ring editorial block text-2xl md:text-4xl"
+            >
+              {profile.email}
+            </a>
+            <p className="mt-6 font-mono text-xs text-muted-foreground">
+              {profile.location} · {profile.phone}
+            </p>
           </div>
 
-          {/* Right side - Social links */}
-          <div className="flex space-x-2">
-            {socialLinks.map((link) => {
-              const Icon = link.icon;
-              return (
-                <Button
-                  key={link.name}
-                  variant="ghost"
-                  size="icon"
-                  asChild
-                  className="focus-ring h-8 w-8"
-                >
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={link.name}
+          {/* Sitemap */}
+          <nav className="md:col-span-3">
+            <p className="label mb-4 text-muted-foreground">Index</p>
+            <ul className="space-y-2">
+              {SITEMAP.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    to={item.href}
+                    data-cursor="go"
+                    className="link-sweep focus-ring font-mono text-2xs uppercase tracking-[0.16em]"
                   >
-                    <Icon className="h-4 w-4" />
-                  </a>
-                </Button>
-              );
-            })}
-          </div>
-        </div>
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        {/* Bottom */}
-        <div className="mt-6 pt-6 border-t">
-          <p className="text-center text-xs text-muted-foreground">
-            © {new Date().getFullYear()} {profile.name}. Built with React + TypeScript.
+          {/* Outbound */}
+          <nav className="md:col-span-3">
+            <p className="label mb-4 text-muted-foreground">Elsewhere</p>
+            <ul className="space-y-2">
+              {elsewhere.map((item) => (
+                <li key={item.name}>
+                  <a
+                    href={item.href}
+                    target={item.href.startsWith("mailto:") ? undefined : "_blank"}
+                    rel="noopener noreferrer"
+                    data-cursor="open"
+                    className="link-sweep focus-ring font-mono text-2xs uppercase tracking-[0.16em]"
+                  >
+                    {item.name} ↗
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      {/* Name at full measure — the sign-off */}
+      <div className="overflow-hidden border-t border-border">
+        <div className="container py-8">
+          <ScrambleText
+            text={profile.name}
+            as="div"
+            speed={3}
+            className="display block text-center text-[clamp(3rem,17vw,14rem)] leading-none text-foreground"
+          />
+        </div>
+      </div>
+
+      <div className="border-t border-border">
+        <div className="container flex flex-col items-center justify-between gap-2 py-5 sm:flex-row">
+          <p className="label text-muted-foreground">
+            © {new Date().getFullYear()} — All rights reserved
+          </p>
+          <p className="label text-muted-foreground">
+            React · TypeScript · Vite — set in Archivo &amp; IBM Plex Mono
           </p>
         </div>
       </div>

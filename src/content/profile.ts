@@ -9,7 +9,7 @@ export const profile = {
   github: "https://github.com/Anish422",
   linkedin: "https://linkedin.com/in/anish-shah422",
   deansList: ["Fall 2023", "Summer 2024"],
-  graduation: "Aug 2026",
+  graduation: "Dec 2026",
 
   // Hero section content
   heroTitle: "Hi, I'm Anish! I build secure, reliable, data-driven apps.",
