@@ -35,6 +35,24 @@ export const projects = [
     featured: true
   },
   {
+    title: "Junkyard CC",
+    when: "Aug 2026",
+    stack: [
+      "JavaScript", "HTML5 Canvas", "Supabase", "localStorage", "Vercel"
+    ],
+    summary: "Single-player top-down time-trial racer where you build a car out of randomly drafted scrap, then race it against checkpoints, medals and your own ghost.",
+    bullets: [
+      "Combo tag system: every part carries tags, and three or more of a tag unlocks a set bonus — so a statistically weak part is often the correct pick and no dominant build exists.",
+      "Ghost racing from a full input trace of your best run, replayed as a translucent car wearing the build that set the record — a permanent rival with no opponent AI.",
+      "Persistence across five tracks (best times, medals, saved builds) with a Supabase-backed leaderboard for clean runs, plus build codes that let a friend race your time in your exact car."
+    ],
+    links: [
+      { label: "Play now", href: "https://junkyardcc.vercel.app/" }
+    ],
+    category: "Game",
+    featured: false
+  },
+  {
     title: "gameday.",
     when: "Sep 2024",
     stack: ["Python", "Flask", "RapidAPI (NFL)", "REST", "JSON"],
@@ -84,10 +102,13 @@ export const projects = [
   }
 ];
 
+// Note: the Projects page derives its filter chips from the data above at
+// runtime, so this list is informational only — keep it in step by hand.
 export const projectCategories = [
   "All",
-  "Web", 
+  "Web",
   "Data",
+  "Game",
   "Android",
   "Security"
 ];
